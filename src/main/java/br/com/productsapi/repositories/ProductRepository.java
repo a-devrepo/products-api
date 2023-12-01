@@ -1,10 +1,11 @@
 package br.com.productsapi.repositories;
 
 import br.com.productsapi.models.Product;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class ProductRepository implements IProductRepository {
 
     private List<Product> products;
