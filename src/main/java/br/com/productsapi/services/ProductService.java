@@ -1,5 +1,6 @@
 package br.com.productsapi.services;
 
+import br.com.productsapi.exceptions.ProdutoNaoEncontradoException;
 import br.com.productsapi.models.Product;
 import br.com.productsapi.repositories.IProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductService implements IProductService{
+public class ProductService implements IProductService {
 
     @Autowired
     private IProductRepository repository;
@@ -20,7 +21,11 @@ public class ProductService implements IProductService{
 
     @Override
     public Product findById(Long id) {
-        return repository.findById(id);
+        Product product = repository.findById(id);
+        if (product == null) {
+            throw new ProdutoNaoEncontradoException("Produto não encontrado");
+        }
+        return product;
     }
 
     @Override
@@ -30,7 +35,7 @@ public class ProductService implements IProductService{
 
     @Override
     public void update(Long id, Product product) {
-        repository.update(id,product);
+        repository.update(id, product);
     }
 
     @Override
