@@ -15,4 +15,6 @@ public interface IOrderService {
     void update(Long id, Order product);
 
     void delete(Long id);
+
+    public double calculateOrderPrice(Order newOrder);
 }

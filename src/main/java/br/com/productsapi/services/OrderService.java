@@ -44,4 +44,16 @@ public class OrderService implements IOrderService {
     public void delete(Long id) {
         repository.delete(id);
     }
+
+    public double calculateOrderPrice(Order newOrder){
+        double orderPrice = 0.0;
+        if(newOrder.getDiscount() == null){
+            orderPrice =  newOrder.getOrderPrice();
+        } else {
+            double discount = newOrder.getDiscount();
+            double priceWithDiscount = newOrder.getProduct().getPriceWithDiscount(discount);
+            orderPrice = priceWithDiscount * newOrder.getQuantity();
+        }
+        return orderPrice;
+    }
 }
