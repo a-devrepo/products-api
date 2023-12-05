@@ -9,7 +9,15 @@ public class Product {
 
     public Product() {
     }
-    
+
+    public Product(Long id, String description, String supplier, Double price, Double maxDiscount) {
+        this.id = id;
+        this.description = description;
+        this.supplier = supplier;
+        this.price = price;
+        this.maxDiscount = maxDiscount;
+    }
+
     public Long getId() {
         return id;
     }
