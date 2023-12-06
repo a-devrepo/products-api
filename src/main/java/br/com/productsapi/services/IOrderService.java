@@ -1,7 +1,7 @@
 package br.com.productsapi.services;
 
 import br.com.productsapi.models.Order;
-import br.com.productsapi.models.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public interface IOrderService {
 
     Order findById(Long id);
 
-    Order add(Order order);
+    Order save(Order order);
 
     void update(Long id, Order product);
 

@@ -4,7 +4,7 @@ import br.com.productsapi.models.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface IProductRepository {
 
     List<Product> findALL();

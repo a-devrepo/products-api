@@ -6,16 +6,18 @@ public class Product {
     private String supplier;
     private Double price;
     private Double maxDiscount;
+    private Integer stockQuantity;
 
     public Product() {
     }
 
-    public Product(Long id, String description, String supplier, Double price, Double maxDiscount) {
+    public Product(Long id, String description, String supplier, Double price, Double maxDiscount, Integer stockQuantity) {
         this.id = id;
         this.description = description;
         this.supplier = supplier;
         this.price = price;
         this.maxDiscount = maxDiscount;
+        this.stockQuantity = stockQuantity;
     }
 
     public Long getId() {
@@ -56,6 +58,13 @@ public class Product {
 
     public void setMaxDiscount(Double maxDiscount) {
         this.maxDiscount = maxDiscount;
+    }
+
+    public Integer getStockQuantity() {
+        return stockQuantity;
+    }
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
     public double getPriceWithDiscount(double discount) {

@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository
 public class OrderRepository implements IOrderRepository {
 
     private List<Order> orders;
@@ -26,7 +25,7 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public Order add(Order product) {
+    public Order save(Order product) {
         if (product.getId() == null) {
             product.setId(orders.size() + 1L);
         }
