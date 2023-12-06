@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 @Repository
-public class ProductRepository implements IProductRepository {
+public class ProductRepository {
 
     private List<Product> products;
 
@@ -14,17 +14,17 @@ public class ProductRepository implements IProductRepository {
         products = new ArrayList<>();
     }
 
-    @Override
+
     public List<Product> findALL() {
         return products;
     }
 
-    @Override
+
     public Product findById(Long id) {
         return products.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
     }
 
-    @Override
+
     public Product add(Product product) {
         if (product.getId() == null) {
             product.setId(products.size() + 1L);
@@ -33,7 +33,7 @@ public class ProductRepository implements IProductRepository {
         return product;
     }
 
-    @Override
+
     public void update(Long id, Product product) {
         products.stream()
                 .filter(p -> p.getId() == id).forEach(p -> {
@@ -44,7 +44,7 @@ public class ProductRepository implements IProductRepository {
                 });
     }
 
-    @Override
+
     public void delete(Long id) {
         products.removeIf(p -> p.getId() == id);
     }

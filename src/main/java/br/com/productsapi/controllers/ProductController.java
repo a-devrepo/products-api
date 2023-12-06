@@ -2,6 +2,8 @@ package br.com.productsapi.controllers;
 
 import br.com.productsapi.models.Product;
 import br.com.productsapi.services.IProductService;
+import br.com.productsapi.services.OrderService;
+import br.com.productsapi.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    @Autowired
-    private IProductService service;
+
+    private ProductService service;
+    public ProductController(ProductService service){
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Product>> findAll() {

@@ -2,7 +2,7 @@ package br.com.productsapi.services;
 
 import br.com.productsapi.exceptions.ProdutoNaoEncontradoException;
 import br.com.productsapi.models.Product;
-import br.com.productsapi.repositories.IProductRepository;
+import br.com.productsapi.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +11,12 @@ import java.util.List;
 @Service
 public class ProductService implements IProductService {
 
-    @Autowired
-    private IProductRepository repository;
 
+    private ProductRepository repository;
+
+    public ProductService(ProductRepository repository){
+        this.repository = repository;
+    }
     @Override
     public List<Product> findAll() {
         return repository.findALL();

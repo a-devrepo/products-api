@@ -3,8 +3,8 @@ package br.com.productsapi.services;
 import br.com.productsapi.exceptions.ProdutoForaDeEstoqueException;
 import br.com.productsapi.models.Order;
 import br.com.productsapi.models.Product;
-import br.com.productsapi.repositories.IOrderRepository;
-import br.com.productsapi.repositories.IProductRepository;
+import br.com.productsapi.repositories.OrderRepository;
+import br.com.productsapi.repositories.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,9 +19,9 @@ import static org.mockito.BDDMockito.given;
 class OrderServiceTest {
 
     @Mock
-    IOrderRepository repository;
+    OrderRepository repository;
     @Mock
-    IProductRepository productRepository;
+    ProductRepository productRepository;
     OrderService service;
     Order order;
     Product product;

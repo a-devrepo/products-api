@@ -4,21 +4,18 @@ import br.com.productsapi.exceptions.ProdutoForaDeEstoqueException;
 import br.com.productsapi.exceptions.ProdutoNaoEncontradoException;
 import br.com.productsapi.models.Order;
 import br.com.productsapi.models.Product;
-import br.com.productsapi.repositories.IOrderRepository;
-import br.com.productsapi.repositories.IProductRepository;
 import br.com.productsapi.repositories.OrderRepository;
 import br.com.productsapi.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class OrderService implements IOrderService {
-    private IOrderRepository repository;
-    private IProductRepository productRepository;
+    private OrderRepository repository;
+    private ProductRepository productRepository;
 
-    public OrderService(IProductRepository productRepository, IOrderRepository repository) {
+    public OrderService(ProductRepository productRepository, OrderRepository repository) {
         this.productRepository = productRepository;
         this.repository = repository;
     }

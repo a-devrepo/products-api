@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class OrderRepository implements IOrderRepository {
+@Repository
+public class OrderRepository {
 
     private List<Order> orders;
 
@@ -14,17 +14,17 @@ public class OrderRepository implements IOrderRepository {
         orders = new ArrayList<>();
     }
 
-    @Override
+
     public List<Order> findALL() {
         return orders;
     }
 
-    @Override
+
     public Order findById(Long id) {
         return orders.stream().filter(order -> order.getId() == id).findFirst().orElse(null);
     }
 
-    @Override
+
     public Order save(Order product) {
         if (product.getId() == null) {
             product.setId(orders.size() + 1L);
@@ -33,7 +33,7 @@ public class OrderRepository implements IOrderRepository {
         return product;
     }
 
-    @Override
+
     public void update(Long id, Order order) {
         orders.stream()
                 .filter(o -> o.getId() == id).forEach(o -> {
@@ -43,7 +43,7 @@ public class OrderRepository implements IOrderRepository {
                 });
     }
 
-    @Override
+
     public void delete(Long id) {
         orders.removeIf(o -> o.getId() == id);
     }
