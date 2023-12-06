@@ -46,9 +46,14 @@ class ProductControllerTest {
 
     @Test
     public void givenListOfProducts_WhenFindAllProducts_ThenReturnProductsList() throws Exception {
-        String requestBody = "{\"id\":1,\"description\":\"Notebook\",\"supplier\":\"DELL\",\"price\":6000.0,\"maxDiscount\":0.1,\"stockQuantity\":5}";
+        String requestBody = mapper.writeValueAsString(product);
 
-        String expectedResponseBody = "[{\"id\":1,\"description\":\"Notebook\",\"supplier\":\"DELL\",\"price\":6000.0,\"maxDiscount\":0.1,\"stockQuantity\":5}]";
+        String expectedResponseBody = "[{\"id\":1" +
+                ",\"description\":\"Notebook\"" +
+                ",\"supplier\":\"DELL\"" +
+                ",\"price\":6000.0" +
+                ",\"maxDiscount\":0.1" +
+                ",\"stockQuantity\":5}]";
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/products")
@@ -68,9 +73,9 @@ class ProductControllerTest {
 
     @Test
     public void givenProductId_WhenFindById_ThenReturnProductObject() throws Exception {
-        String requestBody = "{\"id\":1,\"description\":\"Notebook\",\"supplier\":\"DELL\",\"price\":6000.0,\"maxDiscount\":0.1,\"stockQuantity\":5}";
+        String requestBody = mapper.writeValueAsString(product);
 
-        String expectedResponseBody = "{\"id\":1,\"description\":\"Notebook\",\"supplier\":\"DELL\",\"price\":6000.0,\"maxDiscount\":0.1,\"stockQuantity\":5}";
+        String expectedResponseBody = mapper.writeValueAsString(product);
 
         mockMvc.perform(MockMvcRequestBuilders
                 .post("/products")
@@ -85,5 +90,53 @@ class ProductControllerTest {
         String responseBody = result.getResponse().getContentAsString();
 
         assertEquals(expectedResponseBody, responseBody);
+    }
+
+    @Test
+    public void givenUpdatedProductObject_WhenUpdate_ThenReturnNoContent() throws Exception {
+        String newProductRequestBody = mapper.writeValueAsString(product);
+
+        String updateProductRequestBody = "{\"id\":1" +
+                ",\"description\":\"Notebook\"" +
+                ",\"supplier\":\"Apple\"" +
+                ",\"price\":10000.0" +
+                ",\"maxDiscount\":0.1" +
+                ",\"stockQuantity\":5}";
+
+        String expectedResponseBody =
+                "{\"id\":1" +
+                        ",\"description\":\"Notebook\"" +
+                        ",\"supplier\":\"Apple\"" +
+                        ",\"price\":10000.0" +
+                        ",\"maxDiscount\":0.1" +
+                        ",\"stockQuantity\":5}";
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/products")
+                .content(newProductRequestBody)
+                .contentType("application/json"));
+
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
+                        .put("/products/{id}",product.getId())
+                        .content(updateProductRequestBody)
+                        .contentType("application/json"))
+                .andExpect(status().isNoContent())
+                .andReturn();
+    }
+
+    @Test
+    public void givenProductId_WhenDelete_ThenReturnNoContent() throws Exception {
+
+        String requestBody = mapper.writeValueAsString(product);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .post("/products")
+                .content(requestBody)
+                .contentType("application/json"));
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/products/{id}",product.getId()))
+                .andExpect(status().isNoContent());
     }
 }
